@@ -15,11 +15,11 @@ const userSchema = new mongoose.Schema(
         },
         password: {
             type: 'string',
-            required: true,
+            required: true
         },
         token: {
             type: 'string',
-            max: 2000
+            max: 1000
         }
     },
     {
@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema(
             updatedAt: 'updatedAt'
         },
         toJSON: { getters: true },
-        versionKey: false
+        versionKey: false,
+        id: false
     }
 );
 

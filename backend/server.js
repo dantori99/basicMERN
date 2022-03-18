@@ -11,6 +11,8 @@ const port = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 
+const Users = require('./routes/users.route')
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
@@ -26,5 +28,7 @@ mongoose.connect(
         useUnifiedTopology: true,
     }
 ).then(() => console.log('MongoDB Connected')).catch((e) => console.log(e));
+
+app.use('/', Users)
 
 server.listen(port, () => console.log(`Connected to port ${port}`));

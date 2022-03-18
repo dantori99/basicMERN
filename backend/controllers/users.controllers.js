@@ -10,7 +10,7 @@ class userController {
             } else {
                 let { name, email, password } = req.body;
                 
-                password = decrypt(password);
+                password = encrypt(password);
                 const newUser = await User.create({ name, email, password });
 
                 const data = await User.findOne({ email: newUser.email }).select('-id').select('-createdAt').select('-updatedAt').select('-password');
@@ -41,7 +41,7 @@ class userController {
 
             const userToken = createToken(data);
             
-            const resData = await User.findOneAndUpdate({ email: checkUser.email }, { token: userToken }, { new: true }).select('-id').select('-createdAt').select('-updatedAt').select('-password');;
+            const resData = await User.findOneAndUpdate({ email: checkUser.email }, { token: userToken }, { new: true }).select('-id').select('-deleted').select('-createdAt').select('-updatedAt').select('-password');;
 
             res.status(200).json({ statusCode: 200, msg: 'login success!', data: resData });
         } catch (error) {
