@@ -5,17 +5,23 @@ const balanceCheckerSchema = new mongoose.Schema(
     {
         totalBalance: {
             type: Number,
+            default: 0,
         },
         income: {
             type: Number,
+            default: 0,
         },
         expense: {
             type: Number,
+            default: 0,
         },
         description: {
             type: 'string',
-            required: true
-        }
+        },
+        user_id: [{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+        }]
     },
     {
         timestamps: {
@@ -24,12 +30,11 @@ const balanceCheckerSchema = new mongoose.Schema(
         },
         toJSON: { getters: true },
         versionKey: false,
-        id: false
     },
 );
 
 balanceCheckerSchema.plugin(mongooseDelete, { overrideMethods: 'all' });
 
-const BalanceChecker = mongoose.model('BalanceChecker', balanceCheckerSchema);
+const balanceChecker = mongoose.model('BalanceChecker', balanceCheckerSchema);
 
-module.exports = BalanceChecker;
+module.exports = balanceChecker;

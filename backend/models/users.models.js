@@ -20,7 +20,12 @@ const userSchema = new mongoose.Schema(
         token: {
             type: 'string',
             max: 1000
-        }
+        },
+        balanceData: [{
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'BalanceChecker'
+        }]
     },
     {
         timestamps: {

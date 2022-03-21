@@ -11,7 +11,8 @@ const port = process.env.PORT || 3000;
 const app = express();
 const server = http.createServer(app);
 
-const Users = require('./routes/users.route')
+const User = require('./routes/users.route')
+const Balance = require('./routes/balance.route')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -29,6 +30,7 @@ mongoose.connect(
     }
 ).then(() => console.log('MongoDB Connected')).catch((e) => console.log(e));
 
-app.use('/', Users)
+app.use('/', User)
+app.use('/', Balance)
 
 server.listen(port, () => console.log(`Connected to port ${port}`));
